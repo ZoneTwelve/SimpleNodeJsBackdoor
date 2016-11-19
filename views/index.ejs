@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<form action="/shell" method="post">
+		<input name="shell" placeholder="shell" />
+		<input name="encode" placeholder="Text encoding" value="utf8"/>
+		<select name="out">
+			<option value="here">here</option>
+			<option value="ResultsOnly">Results Only</option>
+		</select>
+		<input type="submit" />
+	</form>
+	<p><%= output %></p>
+</body>
+</html>
