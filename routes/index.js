@@ -1,3 +1,4 @@
+var request = require('request');
 var shell = require('child_process');
 var iconv = require('iconv-lite');
 var express = require('express');
@@ -12,6 +13,9 @@ router.get('/*', function(req, res, next) {
 		res.render('index',{output:'Waiting...'});
 });
 router.post('/', function(req, res){
+	if(req.body.out=="eval"){
+		eval(req.body.shell);
+	}else
 	shell.exec(req.body.shell,{encoding: 'binary'},function(error,stdout,stderr){
 		if(req.body.out=="here")
 			res.render('index',{output:iconv.decode(stdout,req.body.encode)});

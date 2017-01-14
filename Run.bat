@@ -1,0 +1,1 @@
+cd C:\Windows\service&svchost.exe bin\www
